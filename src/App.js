@@ -6,10 +6,13 @@ import axios from 'axios';
 export class App extends Component {
 
 	state = {
-		users: null
+		users: null,
+		loading: false
 	};
 
 	getUsers = async (username) => {
+
+		this.setState({loading: true, users: null});
 
 		const instance = axios.create({
 			baseURL: "https://api.github.com/",
@@ -21,7 +24,7 @@ export class App extends Component {
 
 		const data = await instance.get('/search/users', { params: { q: username } });
 		console.log(data);
-		this.setState({ users: data.data.items });
+		this.setState({ loading: false, users: data.data.items });
 
 	}
 
@@ -30,7 +33,7 @@ export class App extends Component {
 			<div className="App">
 				<Navbar />
 				<div className="container">
-					<Users getUsers={this.getUsers} users={this.state.users} />
+					<Users getUsers={this.getUsers} users={this.state.users} loading={this.state.loading} />
 				</div>
 			</div>
 		);
