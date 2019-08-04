@@ -11,10 +11,10 @@ export function Users(props) {
 		<div>
 			<Search getUsers={getUsers} />
 			{loading ? <Spinner /> : ""}
-			<div className="row">
+			<div className="row justify-content-between">
 				{users && users.map((user, index) => {
 					return (
-						<UserItem {...user} />
+						<UserItem {...user} key={index} />
 					)
 				})}
 			</div>
