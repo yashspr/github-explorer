@@ -14,8 +14,9 @@ export class Search extends Component {
 
 	formSubmit = (e) => {
 		e.preventDefault();
-		if(this.state.searchText.trim() === "") {
+		if(e.target.innerText === "Clear" || this.state.searchText.trim() === "") {
 			this.props.clearUsers();
+			this.setState({searchText: ""})
 		} else {
 			this.props.getUsers(document.querySelector('#username_search').value.trim());
 		}
@@ -30,7 +31,8 @@ export class Search extends Component {
 			<>
 				<form className="form-inline row my-3" onSubmit={this.formSubmit}>
 					<input type="text" className="col-md-9 col-sm-12 form-control mb-2 mr-sm-2" id="username_search" placeholder="Search for a user" value={this.state.searchText} onChange={this.onChange} />
-					<button type="submit" className="col-md-1 col-sm-12 btn btn-primary mb-2" onClick={this.formSubmit}>Submit</button>
+					<button type="submit" className="col-md-1 col-sm-12 btn btn-primary mb-2 mr-1" onClick={this.formSubmit}>Submit</button>
+					<button type="submit" className="col-md-1 col-sm-12 btn btn-secondary mb-2" onClick={this.formSubmit}>Clear</button>
 				</form>
 			</>
 		)

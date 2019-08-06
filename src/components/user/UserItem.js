@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 export function UserItem(props) {
 	const { id, avatar_url, login: username, html_url: profile_url } = props;
@@ -10,14 +11,14 @@ export function UserItem(props) {
 			<div className="text-center">
 				<div><strong>{username}</strong></div>
 				<div className="mb-2">{id}</div>
-				<a href={profile_url} className="btn btn-sm btn-primary">Read More</a>
+				<Link to={`/user/${username}`} className="btn btn-sm btn-primary">Read More</Link>
 			</div>
 		</div>
 	)
 }
 
 UserItem.propTypes = {
-	id: PropTypes.string.isRequired,
+	id: PropTypes.number.isRequired,
 	login: PropTypes.string.isRequired,
 	html_url: PropTypes.string.isRequired,
 	avatar_url: PropTypes.string.isRequired,
