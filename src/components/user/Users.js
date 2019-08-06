@@ -2,6 +2,7 @@ import React from 'react';
 import UserItem from '../user/UserItem';
 import Spinner from '../layout/Spinner';
 import Search from '../layout/Search';
+import PropTypes from 'prop-types';
 
 export function Users(props) {
 
@@ -21,5 +22,12 @@ export function Users(props) {
 		</div>
 	)
 }
+
+Users.propTypes = {
+	getUsers: PropTypes.func.isRequired,
+	clearUsers: PropTypes.func.isRequired,
+	loading: PropTypes.bool.isRequired,
+	users: PropTypes.array.isRequired,
+};
 
 export default Users;

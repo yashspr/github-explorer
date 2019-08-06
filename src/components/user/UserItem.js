@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export function UserItem(props) {
 	const { id, avatar_url, login: username, html_url: profile_url } = props;
@@ -14,5 +15,12 @@ export function UserItem(props) {
 		</div>
 	)
 }
+
+UserItem.propTypes = {
+	id: PropTypes.string.isRequired,
+	login: PropTypes.string.isRequired,
+	html_url: PropTypes.string.isRequired,
+	avatar_url: PropTypes.string.isRequired,
+};
 
 export default UserItem;

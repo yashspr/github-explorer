@@ -1,10 +1,16 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 export class Search extends Component {
 
+	static propTypes = {
+		getUsers: PropTypes.func.isRequired,
+		clearUsers: PropTypes.func.isRequired,
+	};
+
 	state = {
 		searchText: ""
-	}
+	};
 
 	formSubmit = (e) => {
 		e.preventDefault();
