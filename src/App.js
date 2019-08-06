@@ -28,12 +28,17 @@ export class App extends Component {
 
 	}
 
+	clearUsers = () => {
+		this.setState({users: null});
+	}
+
 	render() {
 		return (
 			<div className="App">
 				<Navbar />
 				<div className="container">
-					<Users getUsers={this.getUsers} users={this.state.users} loading={this.state.loading} />
+					<Users getUsers={this.getUsers} users={this.state.users} loading={this.state.loading}
+							clearUsers={this.clearUsers} />
 				</div>
 			</div>
 		);

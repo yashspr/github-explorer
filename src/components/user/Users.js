@@ -5,11 +5,11 @@ import Search from '../layout/Search';
 
 export function Users(props) {
 
-	const {users, loading, getUsers} = props;
+	const {users, loading, getUsers, clearUsers} = props;
 
 	return (
 		<div>
-			<Search getUsers={getUsers} />
+			<Search getUsers={getUsers} clearUsers={clearUsers} />
 			{loading ? <Spinner /> : ""}
 			<div className="row justify-content-between">
 				{users && users.map((user, index) => {
