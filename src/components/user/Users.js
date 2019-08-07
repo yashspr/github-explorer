@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import UserItem from '../user/UserItem';
 import Spinner from '../layout/Spinner';
 import Search from '../layout/Search';
-import PropTypes from 'prop-types';
+import GitHubContext from '../../context/github/githubContext';
 
-export function Users(props) {
+const Users = (props) => {
 
-	const {users, loading, getUsers, clearUsers} = props;
-
+	const context = useContext(GitHubContext);
+	const {users, loading} = context;
+	
 	return (
 		<div>
-			<Search getUsers={getUsers} clearUsers={clearUsers} />
+			<Search />
 			{loading ? <Spinner /> : ""}
 			<div className="row justify-content-between">
 				{users && users.map((user, index) => {
@@ -22,12 +23,5 @@ export function Users(props) {
 		</div>
 	)
 }
-
-Users.propTypes = {
-	getUsers: PropTypes.func.isRequired,
-	clearUsers: PropTypes.func.isRequired,
-	loading: PropTypes.bool.isRequired,
-	users: PropTypes.array.isRequired,
-};
 
 export default Users;

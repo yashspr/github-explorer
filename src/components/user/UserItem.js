@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 export function UserItem(props) {
-	const { id, avatar_url, login: username, html_url: profile_url } = props;
+	const { id, avatar_url, login: username} = props;
 
 	return (
 		<div className="col-md-2 col-sm-5 mr-3 mt-3 border p-4">

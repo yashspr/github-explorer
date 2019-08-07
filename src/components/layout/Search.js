@@ -1,42 +1,35 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useContext } from 'react';
+import GithubContext from '../../context/github/githubContext';
 
-export class Search extends Component {
+export function Search(props) {
 
-	static propTypes = {
-		getUsers: PropTypes.func.isRequired,
-		clearUsers: PropTypes.func.isRequired,
-	};
+	const [searchText, setSearchText] = useState('');
+	const context = useContext(GithubContext);
+	const {searchUsers, clearUsers} = context;
 
-	state = {
-		searchText: ""
-	};
-
-	formSubmit = (e) => {
+	const formSubmit = (e) => {
 		e.preventDefault();
-		if(e.target.innerText === "Clear" || this.state.searchText.trim() === "") {
-			this.props.clearUsers();
-			this.setState({searchText: ""})
+		if (e.target.innerText === "Clear" || searchText === "") {
+			clearUsers();
+			setSearchText("");
 		} else {
-			this.props.getUsers(document.querySelector('#username_search').value.trim());
+			searchUsers(searchText);
 		}
 	}
 
-	onChange = (e) => {
-		this.setState({searchText: e.target.value.trim()})
+	const onChange = (e) => {
+		setSearchText(e.target.value.trim());
 	}
 
-	render() {
-		return (
-			<>
-				<form className="form-inline row my-3" onSubmit={this.formSubmit}>
-					<input type="text" className="col-md-9 col-sm-12 form-control mb-2 mr-sm-2" id="username_search" placeholder="Search for a user" value={this.state.searchText} onChange={this.onChange} />
-					<button type="submit" className="col-md-1 col-sm-12 btn btn-primary mb-2 mr-1" onClick={this.formSubmit}>Submit</button>
-					<button type="submit" className="col-md-1 col-sm-12 btn btn-secondary mb-2" onClick={this.formSubmit}>Clear</button>
-				</form>
-			</>
-		)
-	}
+	return (
+		<>
+			<form className="form-inline row my-3" onSubmit={formSubmit}>
+				<input type="text" className="col-md-9 col-sm-12 form-control mb-2 mr-sm-2" id="username_search" placeholder="Search for a user" value={searchText} onChange={onChange} />
+				<button type="submit" className="col-md-1 col-sm-12 btn btn-primary mb-2 mr-1" onClick={formSubmit}>Submit</button>
+				<button type="submit" className="col-md-1 col-sm-12 btn btn-secondary mb-2" onClick={formSubmit}>Clear</button>
+			</form>
+		</>
+	)
 }
 
 export default Search
