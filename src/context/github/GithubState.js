@@ -84,11 +84,11 @@ const githubState = (props) => {
 				user: state.user,
 				repos: state.repos,
 				loading: state.loading,
-				searchUsers: searchUsers,
-				clearUsers: clearUsers,
-				getUserInfo: getUserInfo,
-				getReposInfo: getReposInfo,
-				clearUserAndRepos: clearUserAndRepos
+				searchUsers,
+				clearUsers,
+				getUserInfo,
+				getReposInfo,
+				clearUserAndRepos
 			}}
 		>
 			{props.children}

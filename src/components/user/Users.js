@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import UserItem from '../user/UserItem';
 import Spinner from '../layout/Spinner';
-import Search from '../layout/Search';
 import GitHubContext from '../../context/github/githubContext';
 
 const Users = (props) => {
@@ -11,7 +10,6 @@ const Users = (props) => {
 	
 	return (
 		<div>
-			<Search />
 			{loading ? <Spinner /> : ""}
 			<div className="row justify-content-between">
 				{users && users.map((user, index) => {
