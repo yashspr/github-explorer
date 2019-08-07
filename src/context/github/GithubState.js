@@ -12,6 +12,17 @@ import {
 	CLEAR_USER_AND_REPOS
 } from '../types';
 
+let githubclientid;
+let githubclientsecret;
+
+if(process.env.NODE_ENV !== 'production') {
+	githubclientid = process.env.REACT_APP_GITHUB_CLIENT_ID;
+	githubclientsecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
+} else {
+	githubclientid = process.env.GITHUB_CLIENT_ID;
+	githubclientsecret = process.env.GITHUB_CLIENT_SECRET;
+}
+
 const githubState = (props) => {
 	const initialState = {
 		users: [],
@@ -24,9 +35,6 @@ const githubState = (props) => {
 
 	const instance = axios.create({
 		baseURL: "https://api.github.com/",
-		headers: {
-			"Authorization": "token 096419c07b33988fc97d74277bf4ceae470fd84e"
-		},
 		responseType: "json"
 	});
 
@@ -34,7 +42,7 @@ const githubState = (props) => {
 	const searchUsers = async (username) => {
 		setLoading();
 		clearUsers();
-		const data = await instance.get('/search/users', { params: { q: username } });
+		const data = await instance.get('/search/users', { params: { q: username, client_id: githubclientid, client_secret: githubclientsecret } });
 		dispatch({
 			type: SEARCH_USERS,
 			payload: data.data.items
@@ -44,7 +52,7 @@ const githubState = (props) => {
 	// Get user information
 	const getUserInfo = async (username) => {
 		setLoading();
-		const data = await instance.get(`/users/${username}`);
+		const data = await instance.get(`/users/${username}`, { params: { client_id: githubclientid, client_secret: githubclientsecret } });
 		dispatch({
 			type: GET_USER_INFO,
 			payload: data.data
@@ -59,7 +67,7 @@ const githubState = (props) => {
 	// Get Repos
 	const getReposInfo = async (username) => {
 		setLoading();
-		const data = await instance.get(`/users/${username}/repos`);
+		const data = await instance.get(`/users/${username}/repos`, { params: { client_id: githubclientid, client_secret: githubclientsecret } });
 		dispatch({
 			type: GET_USER_REPOS,
 			payload: data.data
